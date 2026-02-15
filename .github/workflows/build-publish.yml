@@ -1,4 +1,4 @@
-name: Build and Publish Distroless filtlong
+name: Build and Publish filtlong
 
 on:
   push:

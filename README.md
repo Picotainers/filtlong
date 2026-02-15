@@ -1,5 +1,5 @@
 # filtlong
-Small, distroless-when-possible container for `filtlong`.
+Small compatibility-focused container for `filtlong`.
 
 ## how to use
 ```bash
