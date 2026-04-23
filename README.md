@@ -1,7 +1,18 @@
 # filtlong
-Small compatibility-focused container for `filtlong`.
+Small source-built container for `filtlong`.
 
-## how to use
+## Quick Usage
+
 ```bash
-docker run --rm -v "$(pwd):/data" picotainers/filtlong:latest --help
+# Pull the image
+docker pull docker.io/picotainers/filtlong:latest
+
+# Run the tool
+docker run --rm docker.io/picotainers/filtlong:latest filtlong --help
+```
+
+## Run with mounted local data
+
+```bash
+docker run --rm -v "$(pwd):/data" docker.io/picotainers/filtlong:latest filtlong --help
 ```
