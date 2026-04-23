@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
-RUN git clone --depth 1 https://github.com/rrwick/Filtlong.git filtlong
+RUN git clone --depth 1 https://github.com/rrwick/filtlong.git filtlong
 WORKDIR /build/filtlong
 RUN make
 
