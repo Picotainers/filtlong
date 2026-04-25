@@ -3,6 +3,7 @@
 FROM debian:bookworm-slim AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
+ARG FILTLONG_VERSION=v0.3.1
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     git \
@@ -12,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
-RUN git clone --depth 1 https://github.com/rrwick/filtlong.git filtlong
+RUN git clone --depth 1 --branch "${FILTLONG_VERSION}" https://github.com/rrwick/Filtlong.git filtlong
 WORKDIR /build/filtlong
 RUN make
 
