@@ -1,16 +1,33 @@
 name: Build and Publish filtlong
 
 on:
+  pull_request:
   push:
     branches:
       - main
-    tags:
-      - 'v*'
 
 jobs:
-  build-publish:
+  test:
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
 
+      - name: Build image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: ./Dockerfile
+          load: true
+          tags: picotainers/filtlong:test
+
+      - name: Smoke test
+        run: docker run --rm picotainers/filtlong:test filtlong --help
+
+  publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -28,7 +45,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: picotainers/filtlong:latest
+          tags: docker.io/picotainers/filtlong:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
